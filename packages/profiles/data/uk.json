@@ -1,0 +1,113 @@
+{
+  "id": "uk",
+  "name": "United Kingdom",
+  "profileVersion": "1.0.0",
+  "asOfDate": "2026-11-08",
+  "status": "in_force",
+  "notice": "For training only. Simplified from the UK regime and not legal advice.",
+  "labels": {
+    "report": "SAR",
+    "reportLong": "Suspicious Activity Report",
+    "fiu": "UK Financial Intelligence Unit at the National Crime Agency",
+    "fiuShort": "UKFIU",
+    "nominated": "Money Laundering Reporting Officer (Nominated Officer)",
+    "nominatedShort": "MLRO"
+  },
+  "currencies": ["GBP", "EUR"],
+  "rails": [
+    { "id": "faster_payments", "label": "Faster Payments" },
+    { "id": "chaps", "label": "CHAPS" },
+    { "id": "bacs", "label": "Bacs" },
+    { "id": "sepa", "label": "SEPA" },
+    { "id": "swift", "label": "SWIFT" },
+    { "id": "card", "label": "Card" },
+    { "id": "cash", "label": "Cash" },
+    { "id": "crypto", "label": "Crypto" }
+  ],
+  "routes": [
+    {
+      "id": "mlro",
+      "label": "MLRO (internal report)",
+      "levels": ["l2"],
+      "info": {
+        "what": "An internal report to the firm's MLRO, who decides whether a SAR is made.",
+        "when": "Select it when your review leaves you with knowledge or suspicion.",
+        "mistake": "Delaying the internal report until the suspicion has been proved."
+      }
+    },
+    {
+      "id": "nca_sar",
+      "label": "NCA: Suspicious Activity Report",
+      "levels": ["l2", "l3"],
+      "info": {
+        "what": "A report sent to the UKFIU through the NCA SAR Portal.",
+        "when": "Select it when the case should be disclosed to the NCA and no defence is being requested.",
+        "mistake": "Writing a report that gives the facts but not the reason for suspicion."
+      }
+    },
+    {
+      "id": "nca_daml",
+      "label": "NCA: Defence Against Money Laundering",
+      "levels": ["l2", "l3"],
+      "info": {
+        "what": "A SAR that requests a defence before the firm carries out an act involving suspected criminal property.",
+        "when": "Select it when the firm needs to deal with the property and doing so could be a principal offence.",
+        "mistake": "Treating a DAML as approval of the customer or as a replacement for the firm's own risk assessment."
+      }
+    },
+    {
+      "id": "supervisor",
+      "label": "AML supervisor",
+      "levels": ["l2", "l3"],
+      "info": {
+        "what": "The body that supervises the firm's compliance, such as the FCA.",
+        "when": "Select it for matters about the firm's regulatory obligations.",
+        "mistake": "Assuming that a supervisor and the UKFIU have the same role."
+      }
+    },
+    {
+      "id": "police",
+      "label": "Police",
+      "levels": ["l2", "l3"],
+      "info": {
+        "what": "Direct contact with the police, under the firm's procedures.",
+        "when": "Select it when a crime in progress or an immediate risk to someone needs urgent action.",
+        "mistake": "Assuming that a SAR is the way to report an immediate risk."
+      }
+    },
+    {
+      "id": "customer_notification",
+      "label": "Inform the customer",
+      "levels": ["l2", "l3"],
+      "info": {
+        "what": "Telling the customer about the review or what has been decided about it.",
+        "when": "Consider it only where the law and your firm's procedures allow it.",
+        "mistake": "Not thinking about what the conversation could reveal."
+      },
+      "debrief": "Telling a customer that a disclosure has been made can be the offence of tipping off under section 333A of the Proceeds of Crime Act 2002."
+    }
+  ],
+  "reportForm": {
+    "autoFields": ["Reporting firm", "Report date", "Internal reference", "Subject", "Accounts", "Alert"],
+    "sections": [
+      { "id": "escalation_note", "label": "Escalation note", "help": "State briefly what you saw and why it needs further review." },
+      { "id": "activity_summary", "label": "Summary of activity", "help": "Choose the text that states the facts: who, what, where and when." },
+      { "id": "reason_for_suspicion", "label": "Reason for suspicion", "help": "Choose the text that explains why the facts are suspicious." },
+      { "id": "action_taken", "label": "Action taken", "help": "Choose the text that records what was done." },
+      { "id": "daml_request", "label": "Defence requested", "help": "Choose the text that describes the proposed act, if a defence is needed." }
+    ]
+  },
+  "glossaryCodes": [],
+  "daml": { "noticeWorkingDays": 7, "moratoriumDays": 31, "accountThresholdGbp": 1000 },
+  "legalReferences": [
+    { "topic": "Tipping off", "reference": "Proceeds of Crime Act 2002, s.333A" },
+    { "topic": "Notice and moratorium periods", "reference": "Proceeds of Crime Act 2002, s.335" }
+  ],
+  "sources": [
+    { "title": "Proceeds of Crime Act 2002, s.333A", "url": "https://www.legislation.gov.uk/ukpga/2002/29/section/333A/data.html" },
+    { "title": "Proceeds of Crime Act 2002, s.335", "url": "https://www.legislation.gov.uk/ukpga/2002/29/section/335" },
+    { "title": "UK AML guidance update (Reed Smith)", "url": "https://www.reedsmith.com/articles/uk-aml-guidance-update/" },
+    { "title": "SARs Glossary Code and Reporting Routes guidance (IPA)", "url": "https://insolvency-practitioners.org.uk/new-sars-glossary-code-reporting-routes-guidance-aml323/" },
+    { "title": "Change to the DAML threshold (Neopay)", "url": "https://www.neopay.co.uk/?p=3070" }
+  ]
+}

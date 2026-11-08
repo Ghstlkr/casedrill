@@ -1,0 +1,101 @@
+[
+  {
+    "id": "l1",
+    "name": "Level 1: Alert triage",
+    "released": true,
+    "info": {
+      "what": "First review of an alert, using the alert, the customer profile and recent activity.",
+      "when": "Choose this to practise deciding quickly whether an alert can be closed or needs a closer look.",
+      "mistake": "Trying to prove the crime. At this level you only need to decide whether the alert is explained."
+    },
+    "tabs": ["overview", "transactions", "documents", "processing", "report"],
+    "canRequestDocuments": false,
+    "decisions": [
+      {
+        "id": "close",
+        "label": "Close as false positive",
+        "info": {
+          "what": "Ends the review because the activity is explained by what you can see.",
+          "when": "Use it when the facts in the case explain why the alert was raised.",
+          "mistake": "Closing because the amount seems small, without recording what explains the activity."
+        }
+      },
+      {
+        "id": "escalate",
+        "label": "Escalate for investigation",
+        "info": {
+          "what": "Sends the case to a Level 2 investigator, with your short note.",
+          "when": "Use it when the activity remains unexplained or the warning signs need deeper review.",
+          "mistake": "Escalating everything to be safe, or escalating without saying what concerned you."
+        }
+      }
+    ],
+    "weights": { "decision": 50, "evidence": 25, "routing": 0, "report": 10, "priorWork": 0, "typology": 10, "time": 5 }
+  },
+  {
+    "id": "l2",
+    "name": "Level 2: Investigation",
+    "released": true,
+    "info": {
+      "what": "Full review of an escalated case, including documents, connected parties and a guided report.",
+      "when": "Choose this to practise testing a suspicion and explaining it to the {nominatedShort}.",
+      "mistake": "Repeating the earlier analyst's notes without checking the underlying facts."
+    },
+    "tabs": ["overview", "transactions", "documents", "network", "prior_work", "processing", "routing", "report"],
+    "canRequestDocuments": true,
+    "decisions": [
+      {
+        "id": "close",
+        "label": "Close as false positive",
+        "info": {
+          "what": "Ends the investigation because the evidence explains the activity.",
+          "when": "Use it when the evidence you gathered removes the concern.",
+          "mistake": "Closing on the customer's explanation alone when it can be checked against documents."
+        }
+      },
+      {
+        "id": "refer_to_mlro",
+        "label": "Refer to {nominatedShort}",
+        "info": {
+          "what": "Sends your internal report to the {nominated}, who decides whether a {report} is made.",
+          "when": "Use it when you know or suspect money laundering or terrorist financing after your review.",
+          "mistake": "Waiting for proof. A suspicion is enough for the internal report."
+        }
+      }
+    ],
+    "weights": { "decision": 40, "evidence": 25, "routing": 15, "report": 10, "priorWork": 0, "typology": 5, "time": 5 }
+  },
+  {
+    "id": "l3",
+    "name": "Level 3: Reporting decision",
+    "released": false,
+    "info": {
+      "what": "Final review of a referred case, including the quality of the work done before it reached you.",
+      "when": "Choose this to practise deciding whether a {report} should be sent to the {fiuShort}.",
+      "mistake": "Accepting the referral as written without testing its reasoning."
+    },
+    "tabs": ["overview", "transactions", "documents", "network", "prior_work", "processing", "routing", "report"],
+    "canRequestDocuments": true,
+    "decisions": [
+      {
+        "id": "no_report",
+        "label": "Do not report",
+        "info": {
+          "what": "Records a reasoned decision that no {report} will be made.",
+          "when": "Use it when the referral does not support knowledge or suspicion after your review.",
+          "mistake": "Deciding without recording the reasons."
+        }
+      },
+      {
+        "id": "file_report",
+        "label": "File {report}",
+        "info": {
+          "what": "Sends a {report} to the {fiu}.",
+          "when": "Use it when the referral supports knowledge or suspicion and the report is complete.",
+          "mistake": "Filing a report that does not say why the activity is suspicious."
+        }
+      }
+    ],
+    "weights": { "decision": 35, "evidence": 15, "routing": 15, "report": 15, "priorWork": 10, "typology": 5, "time": 5 }
+  }
+]

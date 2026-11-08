@@ -1,0 +1,109 @@
+{
+  "id": "eu",
+  "name": "European Union (AMLR-based)",
+  "profileVersion": "1.0.0",
+  "asOfDate": "2026-11-08",
+  "status": "prospective",
+  "notice": "For training only. Based on Regulation (EU) 2024/1624, which applies from 10 July 2027. Member State rules apply until then, and the common report format was still in draft when this profile was written. Not legal advice.",
+  "labels": {
+    "report": "STR",
+    "reportLong": "Suspicious Transaction Report",
+    "fiu": "National Financial Intelligence Unit",
+    "fiuShort": "National FIU",
+    "nominated": "Compliance Officer (MLRO)",
+    "nominatedShort": "Compliance Officer"
+  },
+  "currencies": ["EUR", "GBP"],
+  "rails": [
+    { "id": "sepa", "label": "SEPA" },
+    { "id": "swift", "label": "SWIFT" },
+    { "id": "card", "label": "Card" },
+    { "id": "cash", "label": "Cash" },
+    { "id": "crypto", "label": "Crypto" }
+  ],
+  "routes": [
+    {
+      "id": "mlro",
+      "label": "Compliance Officer (internal report)",
+      "levels": ["l2"],
+      "info": {
+        "what": "An internal report to the officer who decides whether an STR is sent to the FIU.",
+        "when": "Select it when your review leaves you with knowledge or suspicion.",
+        "mistake": "Delaying the internal report until the suspicion has been proved."
+      }
+    },
+    {
+      "id": "national_fiu",
+      "label": "National FIU: Suspicious Transaction Report",
+      "levels": ["l2", "l3"],
+      "info": {
+        "what": "A report to the Financial Intelligence Unit of the Member State concerned.",
+        "when": "Select it when the case should be disclosed to the FIU.",
+        "mistake": "Writing a report that gives the facts but not the reason for suspicion."
+      }
+    },
+    {
+      "id": "amla",
+      "label": "AMLA",
+      "levels": ["l2", "l3"],
+      "info": {
+        "what": "The EU Anti-Money Laundering Authority, which coordinates supervision and supports FIUs.",
+        "when": "Check which body receives reports from obliged entities before selecting it.",
+        "mistake": "Confusing the roles of EU and national authorities."
+      },
+      "debrief": "AMLA supports and coordinates national FIUs but does not replace them. Suspicions are reported to the FIU."
+    },
+    {
+      "id": "supervisor",
+      "label": "AML supervisor",
+      "levels": ["l2", "l3"],
+      "info": {
+        "what": "The national authority that supervises the firm's compliance.",
+        "when": "Select it for matters about the firm's regulatory obligations.",
+        "mistake": "Assuming that a supervisor and the FIU have the same role."
+      }
+    },
+    {
+      "id": "police",
+      "label": "Police",
+      "levels": ["l2", "l3"],
+      "info": {
+        "what": "Direct contact with the police, under the firm's procedures.",
+        "when": "Select it when a crime in progress or an immediate risk to someone needs urgent action.",
+        "mistake": "Assuming that an STR is the way to report an immediate risk."
+      }
+    },
+    {
+      "id": "customer_notification",
+      "label": "Inform the customer",
+      "levels": ["l2", "l3"],
+      "info": {
+        "what": "Telling the customer about the review or what has been decided about it.",
+        "when": "Consider it only where the law and your firm's procedures allow it.",
+        "mistake": "Not thinking about what the conversation could reveal."
+      },
+      "debrief": "Article 73 of Regulation (EU) 2024/1624 prohibits disclosing to the customer that information is being or has been reported."
+    }
+  ],
+  "reportForm": {
+    "autoFields": ["Obliged entity", "Report date", "Internal reference", "Subject", "Accounts", "Alert"],
+    "sections": [
+      { "id": "escalation_note", "label": "Escalation note", "help": "State briefly what you saw and why it needs further review." },
+      { "id": "activity_summary", "label": "Summary of activity", "help": "Choose the text that states the facts: who, what, where and when." },
+      { "id": "reason_for_suspicion", "label": "Reason for suspicion", "help": "Choose the text that explains why the facts are suspicious." },
+      { "id": "action_taken", "label": "Action taken", "help": "Choose the text that records what was done." }
+    ]
+  },
+  "glossaryCodes": [],
+  "daml": null,
+  "legalReferences": [
+    { "topic": "Reporting of suspicions", "reference": "Regulation (EU) 2024/1624, Article 69" },
+    { "topic": "Prohibition of disclosure", "reference": "Regulation (EU) 2024/1624, Article 73" }
+  ],
+  "sources": [
+    { "title": "AMLR Article 69", "url": "https://www.springlex.eu/en/packages/aml/amlr-regulation/article-69/" },
+    { "title": "AMLR Article 73", "url": "https://www.springlex.eu/en/packages/aml/amlr-regulation/article-73/" },
+    { "title": "AMLA consultation on the reporting format", "url": "https://amla.europa.eu/policy/public-consultations/consultation-draft-its-format-reporting-suspicions-and-providing-transaction-records_en" },
+    { "title": "The EU AML package (Deloitte)", "url": "https://www.deloitte.com/ce/en/services/consulting/perspectives/the-eu-aml-package.html" }
+  ]
+}
