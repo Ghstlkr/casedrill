@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trainingPack schemaVersion="1.0">
+  <parameters title="Cash-intensive business review (EU)" cases="1" truePositives="0" borderline="0"
+              jurisdiction="eu" level="l2" asOfDate="2026-11-08" difficulty="medium"
+              seed="736120" lang="en-GB" sessionMinutes="20"/>
+
+  <scenarios>
+    <scenario id="M2V6">
+      <customer id="FICT-CUST-2201" type="company" name="Fictia Beach Kiosk Ltd" country="Fictland (EU Member State)"
+                riskRating="medium" onboardedOn="2022-04-05" occupation="Beach food and drink kiosk operator"
+                declaredAnnualIncome="190000" currency="EUR">Private limited company operating one kiosk on a public beach under a municipal concession. Business current account used for takings, wages and suppliers.</customer>
+      <accounts>
+        <account id="FICT-ACC-2201" type="business" currency="EUR" openedOn="2022-04-05"/>
+      </accounts>
+      <counterparties>
+        <counterparty id="FICT-CP-2201" name="Morgan Sample" kind="individual" country="Fictland (EU Member State)"/>
+        <counterparty id="FICT-CP-2202" name="Taylor Sample" kind="individual" country="Fictland (EU Member State)"/>
+        <counterparty id="FICT-CP-2203" name="Exemplar Card Acquiring SA" kind="company" country="Fictland (EU Member State)"/>
+        <counterparty id="FICT-CP-2204" name="Municipality of Example Harbour" kind="company" country="Fictland (EU Member State)"/>
+        <counterparty id="FICT-CP-2205" name="Fictia Beverage Wholesale SA" kind="company" country="Fictland (EU Member State)"/>
+        <counterparty id="FICT-CP-2206" name="Payroll: kiosk staff" kind="individual" country="Fictland (EU Member State)"/>
+        <counterparty id="FICT-CP-2207" name="Exampleland Cold Chain Equipment Co" kind="company" country="Republic of Exampleland"/>
+        <counterparty id="FICT-CP-2208" name="Fictland Tax Administration" kind="company" country="Fictland (EU Member State)"/>
+        <counterparty id="FICT-CP-2209" name="Exemplar Office Services SA" kind="company" country="Fictland (EU Member State)"/>
+      </counterparties>
+      <alert id="A1" ruleName="Cash deposits above expected activity" raisedOn="2026-08-24" severity="high">Cash credited in the last 90 days is several times the monthly average expected from the customer profile.</alert>
+      <priorWork author="L1 analyst">Customer is a kiosk, so some cash is expected. Cash value is higher than the profile average. Escalated for full review.</priorWork>
+      <transactionRules>
+        <txRule id="R1" accountId="FICT-ACC-2201" counterpartyIds="FICT-CP-2203" direction="in" rail="card" count="80" minAmount="180" maxAmount="950" fromDay="-90" toDay="-1" reference="Card settlement"/>
+        <txRule id="R2" accountId="FICT-ACC-2201" counterpartyIds="FICT-CP-2201,FICT-CP-2202" direction="in" rail="cash" count="34" minAmount="1200" maxAmount="3800" fromDay="-90" toDay="-1" reference="Takings"/>
+        <txRule id="R3" accountId="FICT-ACC-2201" counterpartyIds="FICT-CP-2204" direction="out" rail="sepa" count="3" minAmount="3200" maxAmount="3200" fromDay="-85" toDay="-20" reference="Beach concession"/>
+        <txRule id="R4" accountId="FICT-ACC-2201" counterpartyIds="FICT-CP-2205" direction="out" rail="sepa" count="14" minAmount="1500" maxAmount="4200" fromDay="-84" toDay="-2" reference="Stock"/>
+        <txRule id="R5" accountId="FICT-ACC-2201" counterpartyIds="FICT-CP-2206" direction="out" rail="sepa" count="15" minAmount="1100" maxAmount="1700" fromDay="-88" toDay="-3" reference="Wages"/>
+        <txRule id="R6" accountId="FICT-ACC-2201" counterpartyIds="FICT-CP-2207" direction="out" rail="swift" count="2" minAmount="6000" maxAmount="9000" fromDay="-80" toDay="-60" reference="Freezer units"/>
+        <txRule id="R7" accountId="FICT-ACC-2201" counterpartyIds="FICT-CP-2208" direction="out" rail="sepa" count="3" minAmount="4000" maxAmount="7500" fromDay="-75" toDay="-8" reference="VAT"/>
+        <txRule id="R8" accountId="FICT-ACC-2201" counterpartyIds="FICT-CP-2209" direction="out" rail="sepa" count="3" minAmount="120" maxAmount="240" fromDay="-82" toDay="-10" reference="Accounting services"/>
+      </transactionRules>
+      <documents>
+        <document id="D1" kind="kyc_form" title="Business onboarding form" availability="initial">One kiosk, open from May to September. Expected annual turnover EUR 190,000, with about 70% earned from June to September. Customers pay by cash or card.</document>
+        <document id="D2" kind="company_register" title="Company register extract" availability="initial">Incorporated in 2021. One director, who also holds 100% of the shares. No other appointments are listed.</document>
+        <document id="D3" kind="account_note" title="Branch deposit notes" availability="initial">Cash is paid in by two people, each with a completed deposit slip naming the kiosk. Deposits are made at the branch nearest the beach.</document>
+        <document id="D4" kind="source_of_funds" title="Management accounts and till reports" availability="on_request" requestMinutes="10">Accounts prepared by an external accountant, with daily till reports for the season. Average sale EUR 9, about 300 sales a day in peak months, and six seasonal staff. Till totals match the card settlements and cash deposits.</document>
+        <document id="D5" kind="rfi_response" title="Director's response to information request" availability="on_request" requestMinutes="5">The director explains that nearly all income is earned in summer and supplies the previous year's statements, which show the same seasonal peak. The two depositors are named as the kiosk supervisors.</document>
+        <document id="D6" kind="invoice" title="Equipment invoice and customs entry" availability="on_request" requestMinutes="5">Invoice for two commercial freezer units from Exampleland Cold Chain Equipment Co, with a customs entry showing the delivery to the kiosk's storage unit. The amounts match the two international payments.</document>
+      </documents>
+      <reportBlocks>
+        <block id="B1" section="activity_summary">The company deposited a lot of cash during the quarter and also made several payments.</block>
+        <block id="B2" section="activity_summary">Over the 90-day review period, cash credited to the company's account was several times the monthly average in its profile. It was paid in by two individuals. Funds were also sent to a company overseas.</block>
+        <block id="B3" section="reason_for_suspicion">The director's explanation shows that the funds may be criminal proceeds.</block>
+        <block id="B4" section="reason_for_suspicion">The cash is well above the customer's monthly average, and two international payments went to a company in a higher-risk country.</block>
+        <block id="B5" section="reason_for_suspicion">Beach kiosks are a high-risk sector, so the cash in this account is likely to be criminal.</block>
+        <block id="B6" section="action_taken">The director was told that a report would be made, so that further documents could be provided.</block>
+        <block id="B7" section="action_taken">The case was referred to the Compliance Officer with the supporting documents. The customer has not been told about the referral.</block>
+      </reportBlocks>
+    </scenario>
+  </scenarios>
+
+  <answerKey>
+    <answer scenarioId="M2V6" outcome="false_positive" decision="close" archetype="seasonal_trader">
+      <explanation>The alert compares a peak season with an annual average. The customer declared at onboarding that about 70% of turnover is earned from June to September, and the cash and card receipts fit that share. Till reports reconcile to the deposits, prior-year statements show the same peak, payroll and stock purchases fit the volume, and an invoice with a customs entry supports the payments overseas.</explanation>
+    </answer>
+  </answerKey>
+</trainingPack>

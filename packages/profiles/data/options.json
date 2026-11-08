@@ -1,0 +1,32 @@
+{
+  "categories": [
+    { "id": "amount", "label": "Amount", "info": { "what": "The value does not fit what is known about the customer.", "when": "Use it when sums are out of line with income, turnover or past activity.", "mistake": "Flagging a large amount without comparing it with the profile." } },
+    { "id": "frequency", "label": "Frequency", "info": { "what": "The number or timing of payments is unusual.", "when": "Use it for bursts, repeated similar payments or funds that move on quickly.", "mistake": "Ignoring normal cycles such as wages or seasonal trade." } },
+    { "id": "counterparty", "label": "Counterparty", "info": { "what": "The other party to a payment raises a question.", "when": "Use it when a payer or payee has no clear link to the customer's stated activity.", "mistake": "Treating an unfamiliar name as suspicious in itself." } },
+    { "id": "geography", "label": "Geography", "info": { "what": "A location does not fit, or carries higher risk.", "when": "Use it when a country or branch location has no clear business reason.", "mistake": "Flagging a country without checking the purpose of the payment." } },
+    { "id": "document", "label": "Document", "info": { "what": "A document is missing, weak or contradicts other facts.", "when": "Use it when the paperwork does not support what the customer says.", "mistake": "Accepting a document without comparing it with the transactions." } },
+    { "id": "behaviour", "label": "Behaviour", "info": { "what": "The way someone acts raises a question.", "when": "Use it for evasive answers, unusual use of the account or third parties acting for the customer.", "mistake": "Relying on impressions instead of recorded facts." } },
+    { "id": "ownership", "label": "Ownership", "info": { "what": "Control or ownership is unclear or hidden.", "when": "Use it when beneficial owners, nominees or connected companies need explaining.", "mistake": "Stopping at the first company in the chain." } }
+  ],
+  "typologies": [
+    { "id": "structuring_cash", "label": "Structured cash deposits", "info": { "what": "Cash split into smaller deposits.", "when": "Choose it when deposits appear arranged to avoid attention.", "mistake": "Calling every regular cash deposit structuring." } },
+    { "id": "money_mule", "label": "Money mule", "info": { "what": "An account used to pass on funds for someone else.", "when": "Choose it when unrelated credits leave quickly and the account holder gains little.", "mistake": "Overlooking mules who may not understand what they are doing." } },
+    { "id": "app_fraud_proceeds", "label": "Proceeds of authorised push payment fraud", "info": { "what": "Funds a victim was deceived into sending.", "when": "Choose it when credits look like payments obtained by deception.", "mistake": "Looking only at the account that first received the funds." } },
+    { "id": "shell_company_opaque_ubo", "label": "Shell company or opaque ownership", "info": { "what": "A company with little real activity or unclear control.", "when": "Choose it when the structure seems to exist mainly to move funds.", "mistake": "Treating every holding company as a shell." } },
+    { "id": "pep_unexplained_wealth", "label": "Politically exposed person with unexplained wealth", "info": { "what": "Wealth that does not fit a public role.", "when": "Choose it when source of wealth cannot be supported.", "mistake": "Assuming that PEP status alone is suspicious." } },
+    { "id": "crypto_off_ramp", "label": "Crypto off-ramp", "info": { "what": "Crypto converted into money in the banking system.", "when": "Choose it when the source of the crypto cannot be explained.", "mistake": "Treating any exchange payment as suspicious." } },
+    { "id": "cash_intensive_front", "label": "Front in a cash-intensive business", "info": { "what": "A real business used to explain cash from elsewhere.", "when": "Choose it when cash cannot be reconciled with the business's capacity.", "mistake": "Comparing cash only with the declared turnover." } },
+    { "id": "trade_based_laundering", "label": "Trade-based laundering", "info": { "what": "Funds moved under the cover of trade.", "when": "Choose it when goods, prices or routes do not make commercial sense.", "mistake": "Reviewing the payment without reviewing the goods." } }
+  ],
+  "archetypes": [
+    { "id": "property_sale", "label": "Property sale", "info": { "what": "A one-off credit from selling property.", "when": "Choose it when completion papers support the funds.", "mistake": "Accepting the explanation without the paperwork." } },
+    { "id": "inheritance", "label": "Inheritance", "info": { "what": "Funds received from an estate.", "when": "Choose it when probate or estate papers support the funds.", "mistake": "Not checking who actually paid the money." } },
+    { "id": "seasonal_trader", "label": "Seasonal trader", "info": { "what": "A business that earns most of its income in certain months.", "when": "Choose it when peaks match the declared season and records.", "mistake": "Comparing a peak month with an annual average." } },
+    { "id": "bonus_or_dividend", "label": "Bonus or dividend", "info": { "what": "An occasional payment from work or shareholdings.", "when": "Choose it when the payer and amount can be confirmed.", "mistake": "Assuming the payment is genuine because it is labelled that way." } },
+    { "id": "family_remittances", "label": "Family remittances", "info": { "what": "Regular support sent to relatives.", "when": "Choose it when amounts and recipients fit the customer's circumstances.", "mistake": "Not noticing when recipients or amounts change." } },
+    { "id": "documented_crypto_gain", "label": "Documented crypto gain", "info": { "what": "Profit from crypto that can be traced.", "when": "Choose it when exchange records support the purchase and the sale.", "mistake": "Accepting a screenshot in place of a full history." } }
+  ],
+  "actions": {
+    "requestDocument": { "what": "Asks for a document that is not yet on file.", "when": "Request it when the document could change your view of the case.", "mistake": "Requesting everything. Each request uses time from your shift." }
+  }
+}

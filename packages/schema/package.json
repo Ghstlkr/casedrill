@@ -1,0 +1,20 @@
+{
+  "name": "@casedrill/schema",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "fast-xml-parser": "^4.5.3",
+    "typescript": "^5.7.3",
+    "vitest": "^3.2.4"
+  }
+}

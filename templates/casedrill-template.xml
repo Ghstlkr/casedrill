@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trainingPack schemaVersion="1.0">
+  <aiInstructions><![CDATA[
+You are filling in a training pack for CaseDrill, a free educational simulator for anti-money laundering analysts.
+Everything you write is fictional and is used only for training.
+
+WHAT TO DO
+1. Read the values in <parameters>. If the user asked for different values, update them.
+2. Replace the two example scenarios with exactly the number of scenarios set in "cases".
+3. Write one <answer> in <answerKey> for every scenario.
+4. Return the complete XML as a downloadable file. If you cannot create files, return it in one code block.
+5. Do not describe the scenarios or the answers in your message, because the user may be the trainee.
+
+BUILD EACH CASE IN THIS ORDER
+1. Before writing any scenario, decide the outcome of every case, so the counts are exact.
+2. Write each case so that its evidence leads to that outcome. Never change an outcome afterwards to reach a count.
+3. A true positive must contain evidence that stays unexplained. Do not resolve it in the documents.
+4. A false positive must contain at least one document with a checkable fact that explains the alert, such as a payslip, a completion statement or till records. A customer's unsupported statement is not enough.
+5. A false positive must not contain an admission, unexplained third-party funds, or an explanation that conflicts with the payments.
+6. Two cases with the same evidence must have the same outcome.
+7. Every true positive needs one typology and every false positive needs one archetype. It must really fit the case. If none fits, write a different case.
+8. State only facts that the case contains. For example, do not mention reporting thresholds unless the case gives one.
+9. Before returning the file, check every case: name the unexplained evidence in each true positive and the document that resolves each false positive. Rewrite any case that fails. Do not put this check in your message.
+
+COUNTS
+- "truePositives" must equal the number of answers with outcome="true_positive".
+- "borderline" must equal the number of answers with outcome="borderline".
+- All remaining answers must have outcome="false_positive".
+- Keep each file to about 20 scenarios or fewer, so the response is not cut off.
+
+FICTIONAL DATA ONLY
+- Never use real people, companies, brands, banks, addresses or news stories.
+- Every person and company name must include Sample, Example, Fictia or Exemplar, such as "Robin Sample" or "Fictia Cafe Ltd".
+- Customer, account and counterparty ids must follow the example: FICT-CUST-0001, FICT-ACC-0001, FICT-CP-0001.
+- Do not write anything that looks like a real national ID, IBAN, sort code or account number.
+- High-risk countries must be invented, such as "Republic of Exampleland".
+
+NO ANSWER LEAKS
+- Scenarios must not contain any field or wording that states the outcome.
+- Give true positives and false positives the same level of detail and the same number of documents.
+- Every scenario needs report blocks, including false positives.
+- Use random-looking scenario ids and mix the order of the outcomes.
+- Use the same mix of alert severities for both outcomes.
+- Use only these alert ruleName values: "Cash deposits above expected activity", "High turnover against expected activity", "Large credit against expected activity", "Payments involving a higher-risk country".
+- Alert text must say only what the system measured, and never suggest the cause.
+- Counterparty names must be neutral. Do not use names like "Opaque Holdings", "Shadow Logistics", "Unknown Sender Group", "Family Gift Transfer" or "Annual Bonus Pool".
+
+CONTENT
+- Describe warning signs an analyst must recognise. Do not explain how to carry out or conceal a crime.
+- Write in British English.
+- UK packs may route to mlro, nca_sar and nca_daml. EU packs may route to mlro and national_fiu.
+- Never mark amla or customer_notification as correct: they are traps for the trainee.
+
+TRANSACTIONS
+- Do not list individual transactions. Write <txRule> elements and CaseDrill will generate the transactions.
+- Day 0 is the alert date. Earlier days are negative. fromDay must not be later than toDay.
+- Add ordinary everyday activity to every scenario, so the suspicious activity has to be found.
+
+ALLOWED VALUES
+Use only the values listed here.
+- outcome: true_positive, false_positive, borderline
+- level: l1 (alert triage), l2 (full investigation)
+- decision at l1: close (false positive), escalate (true positive)
+- decision at l2: close (false positive), refer_to_mlro (true positive)
+- typology: structuring_cash, money_mule, app_fraud_proceeds, shell_company_opaque_ubo, pep_unexplained_wealth, crypto_off_ramp, cash_intensive_front, trade_based_laundering
+- archetype: property_sale, inheritance, seasonal_trader, bonus_or_dividend, family_remittances, documented_crypto_gain
+- customer type: individual, company
+- riskRating: low, medium, high
+- declaredAnnualIncome: a number greater than 0, for individuals and companies
+- currency: GBP, EUR
+- account type: current, savings, business, e_money
+- counterparty kind: individual, company, merchant, crypto_exchange, solicitor
+- alert severity: low, medium, high
+- direction: in, out
+- rail: faster_payments, chaps, bacs, sepa, swift, card, cash, crypto
+- document kind: kyc_form, id_check, source_of_funds, invoice, contract, adverse_media, screening_result, account_note, company_register, rfi_response
+- document availability: initial, or on_request with requestMinutes
+- irregularity targetType: transaction (a txRule id), document, customer, network (a counterparty id)
+- irregularity category: amount, frequency, counterparty, geography, document, behaviour, ownership
+- report section at l1: escalation_note
+- report section at l2: activity_summary, reason_for_suspicion, action_taken, daml_request (UK only)
+
+BORDERLINE CASES
+Set the best "decision" and list both decisions for the level in "acceptable", separated by commas.
+
+LEVELS
+- l1 packs have no <priorWork> and no routing. Each case gets a short escalation note built from report blocks.
+- l2 packs may include <priorWork author="L1 analyst"> with the notes received from the previous analyst. Use the same style in every scenario.
+- l1 packs must set availability="initial" on every document, because Level 1 analysts cannot request documents.
+- A true positive at l2 must route to mlro.
+
+REPORT BLOCKS
+- Every scenario needs at least three report blocks.
+- In a true positive, write one correct block and at least one wrong alternative for each section you use. In correctBlocks, list at most one block per section.
+- A false positive must leave correctBlocks and routing empty.
+- In a false positive, write every block as text for a report that should not be sent. Do not write that the activity is documented or explained.
+]]></aiInstructions>
+
+  <parameters title="Example pack" cases="2" truePositives="1" borderline="0"
+              jurisdiction="uk" level="l2" asOfDate="2026-11-08" difficulty="medium"
+              seed="20261108" lang="en-GB" sessionMinutes="30"/>
+
+  <scenarios>
+    <scenario id="S7K2">
+      <customer id="FICT-CUST-0001" type="individual" name="Sample Person A" country="United Kingdom"
+                riskRating="low" onboardedOn="2026-08-03" occupation="Full-time student"
+                declaredAnnualIncome="7500" currency="GBP">Opened an account online. Expected use: part-time wages and living costs.</customer>
+      <accounts>
+        <account id="FICT-ACC-0001" type="current" currency="GBP" openedOn="2026-08-03"/>
+      </accounts>
+      <counterparties>
+        <counterparty id="FICT-CP-0001" name="Sample Sender One" kind="individual" country="United Kingdom"/>
+        <counterparty id="FICT-CP-0002" name="Sample Sender Two" kind="individual" country="United Kingdom"/>
+        <counterparty id="FICT-CP-0003" name="Sample Sender Three" kind="individual" country="United Kingdom"/>
+        <counterparty id="FICT-CP-0004" name="Example Coin Exchange" kind="crypto_exchange" country="Republic of Exampleland"/>
+        <counterparty id="FICT-CP-0005" name="Example Cafe Ltd" kind="company" country="United Kingdom"/>
+        <counterparty id="FICT-CP-0006" name="Example Grocer" kind="merchant" country="United Kingdom"/>
+      </counterparties>
+      <alert id="A1" ruleName="High turnover against expected activity" raisedOn="2026-10-30" severity="medium">Credits in the last 21 days are well above the declared income profile.</alert>
+      <priorWork author="L1 analyst">Turnover checked against the profile. Escalated for full review of the account activity.</priorWork>
+      <transactionRules>
+        <txRule id="R1" accountId="FICT-ACC-0001" counterpartyIds="FICT-CP-0001,FICT-CP-0002,FICT-CP-0003" direction="in" rail="faster_payments" count="18" minAmount="180" maxAmount="950" fromDay="-21" toDay="-1"/>
+        <txRule id="R2" accountId="FICT-ACC-0001" counterpartyIds="FICT-CP-0004" direction="out" rail="faster_payments" count="16" minAmount="170" maxAmount="900" fromDay="-21" toDay="0"/>
+        <txRule id="R3" accountId="FICT-ACC-0001" counterpartyIds="FICT-CP-0005" direction="in" rail="bacs" count="2" minAmount="540" maxAmount="610" fromDay="-60" toDay="-25" reference="Wages"/>
+        <txRule id="R4" accountId="FICT-ACC-0001" counterpartyIds="FICT-CP-0006" direction="out" rail="card" count="20" minAmount="4" maxAmount="48" fromDay="-60" toDay="0"/>
+      </transactionRules>
+      <documents>
+        <document id="D1" kind="kyc_form" title="Onboarding form" availability="initial">Student. Part-time wages about GBP 625 per month. No crypto activity expected.</document>
+        <document id="D2" kind="account_note" title="Payment reference review" availability="initial">Incoming references are varied and do not name a shared purpose.</document>
+        <document id="D3" kind="rfi_response" title="Customer response to information request" availability="on_request" requestMinutes="5">The customer says the funds belong to an online contact who pays a small commission for moving them. No supporting documents were supplied.</document>
+      </documents>
+      <reportBlocks>
+        <block id="B1" section="activity_summary">Over 21 days the account received multiple unrelated credits, which were followed shortly by payments to a crypto exchange.</block>
+        <block id="B2" section="activity_summary">The customer made some payments during the review period.</block>
+        <block id="B3" section="reason_for_suspicion">The turnover is inconsistent with the student profile, the funds pass through quickly, and the customer says a third party pays commission for moving them.</block>
+        <block id="B4" section="reason_for_suspicion">The customer is young, so the activity seems unusual.</block>
+        <block id="B5" section="action_taken">The case was referred to the MLRO. The customer was not told about the referral.</block>
+        <block id="B6" section="action_taken">The customer was told that a report would be made, so that they could explain.</block>
+      </reportBlocks>
+    </scenario>
+
+    <scenario id="S3M9">
+      <customer id="FICT-CUST-0002" type="individual" name="Sample Person B" country="United Kingdom"
+                riskRating="low" onboardedOn="2019-02-11" occupation="Teacher"
+                declaredAnnualIncome="42000" currency="GBP">Long-standing customer. Salary account with household spending.</customer>
+      <accounts>
+        <account id="FICT-ACC-0002" type="current" currency="GBP" openedOn="2019-02-11"/>
+      </accounts>
+      <counterparties>
+        <counterparty id="FICT-CP-0007" name="Example Solicitors LLP" kind="solicitor" country="United Kingdom"/>
+        <counterparty id="FICT-CP-0008" name="Example County School" kind="company" country="United Kingdom"/>
+        <counterparty id="FICT-CP-0009" name="Example Supermarket" kind="merchant" country="United Kingdom"/>
+      </counterparties>
+      <alert id="A1" ruleName="Large credit against expected activity" raisedOn="2026-10-22" severity="medium">A single credit is far above the customer's usual monthly turnover.</alert>
+      <priorWork author="L1 analyst">Credit checked against the profile. Escalated for full review of the account activity.</priorWork>
+      <transactionRules>
+        <txRule id="R1" accountId="FICT-ACC-0002" counterpartyIds="FICT-CP-0007" direction="in" rail="chaps" count="1" minAmount="186000" maxAmount="186000" fromDay="-1" toDay="-1"/>
+        <txRule id="R2" accountId="FICT-ACC-0002" counterpartyIds="FICT-CP-0008" direction="in" rail="bacs" count="3" minAmount="2780" maxAmount="2780" fromDay="-90" toDay="-5" reference="Salary"/>
+        <txRule id="R3" accountId="FICT-ACC-0002" counterpartyIds="FICT-CP-0009" direction="out" rail="card" count="24" minAmount="9" maxAmount="130" fromDay="-90" toDay="0"/>
+      </transactionRules>
+      <documents>
+        <document id="D1" kind="kyc_form" title="Onboarding form" availability="initial">Teacher. Salary paid monthly. Homeowner.</document>
+        <document id="D2" kind="account_note" title="Payment reference review" availability="initial">The credit reference reads "completion proceeds" and the sender is a firm of solicitors.</document>
+        <document id="D3" kind="source_of_funds" title="Completion statement" availability="on_request" requestMinutes="5">The statement from the solicitors confirms the sale of the customer's home and the net proceeds paid to the customer, matching the credit.</document>
+      </documents>
+      <reportBlocks>
+        <block id="B1" section="activity_summary">The account received one large CHAPS credit from a firm of solicitors.</block>
+        <block id="B2" section="activity_summary">The account was used unusually.</block>
+        <block id="B3" section="reason_for_suspicion">The value of the credit is unusual when compared with the salary.</block>
+        <block id="B4" section="reason_for_suspicion">The customer is a teacher and teachers do not normally hold large balances.</block>
+        <block id="B5" section="action_taken">The case was referred to the MLRO.</block>
+        <block id="B6" section="action_taken">The customer was told that a report would be made.</block>
+      </reportBlocks>
+    </scenario>
+  </scenarios>
+
+  <answerKey>
+    <answer scenarioId="S3M9" outcome="false_positive" decision="close" archetype="property_sale">
+      <explanation>The large credit is explained by a documented property sale, paid through solicitors. Requesting the completion statement resolves the alert.</explanation>
+    </answer>
+    <answer scenarioId="S7K2" outcome="true_positive" decision="refer_to_mlro" typology="money_mule"
+            routing="mlro,nca_sar" correctBlocks="B1,B3,B5">
+      <explanation>Unrelated credits pass quickly to a crypto exchange, against a student profile, and the customer admits being paid commission to move third-party funds.</explanation>
+      <irregularity targetType="transaction" targetRef="R1" category="frequency" note="Many unrelated credits in a short period, inconsistent with the profile."/>
+      <irregularity targetType="transaction" targetRef="R2" category="counterparty" note="Rapid onward payments to a crypto exchange, although none were expected."/>
+      <irregularity targetType="document" targetRef="D3" category="behaviour" note="The customer describes moving funds for a third party in return for commission."/>
+    </answer>
+  </answerKey>
+</trainingPack>
