@@ -2,7 +2,7 @@
 
 **Free money laundering (AML) analyst simulator that runs in your browser.** Work a queue of alerts, investigate fictional customers, decide what to send forward, write a guided report, and see exactly what you missed.
 
-[**Open CaseDrill**](https://YOUR-USERNAME.github.io/casedrill/) (nothing to install, no account)
+[**Open CaseDrill**](https://Ghstlkr.github.io/casedrill/) (nothing to install, no account)
 
 ![A CaseDrill shift, from the alert queue to the results](docs/images/demo.gif)
 
@@ -23,7 +23,7 @@ At the end you get a score, your detection rate and precision, accuracy by patte
 
 ## Start in one minute
 
-1. [Open CaseDrill](https://YOUR-USERNAME.github.io/casedrill/).
+1. [Open CaseDrill](https://Ghstlkr.github.io/casedrill/).
 2. Under **Or try a sample**, choose **UK queue** or **EU queue**.
 3. Read the summary and select **Start shift**.
 4. Select a customer in the queue and work through the tabs.
@@ -114,7 +114,7 @@ Parts that do not apply to a case are left out and the rest are rescaled. To pas
 ## Install or use offline
 
 - **Install:** open CaseDrill and use your browser's install option. It then works offline.
-- **One file:** download `casedrill.html` from the [Releases page](https://github.com/YOUR-USERNAME/casedrill/releases) and open it. This suits computers where installing is restricted.
+- **One file:** download `casedrill.html` from the [Releases page](https://github.com/Ghstlkr/casedrill/releases) and open it. This suits computers where installing is restricted.
 
 Progress is saved in your browser. Clearing browser data deletes it, so use **Save progress to a file** before a long break or to move to another device.
 
